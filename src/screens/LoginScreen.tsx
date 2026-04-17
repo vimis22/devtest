@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import NormalInputField from '../component/NormalInputField.tsx';
-import NormalText from '../component/NormalText.tsx';
+import { StyleSheet, Text, View } from 'react-native';
 import NormalButton from '../component/NormalButton.tsx';
+import NormalInputField from '../component/NormalInputField.tsx';
 
 interface LoginScreenProps {
   onLogin: () => void;
@@ -14,69 +13,76 @@ const LoginScreen = ({ onLogin }: LoginScreenProps) => {
 
   return (
     <View style={styles.container}>
-      <NormalText
-        text={'CHENTIA'}
-        fontColor={'#FFFFFFFF'}
-        fontSize={16}
-        fontBackgroundColor={'#00000000'}
-        fontWeight={'normal'}
-      />
+      <Text style={styles.title}>CHENTIA</Text>
 
-      <NormalText
-        text={'Name:'}
-        fontColor={'#FFFFFFFF'}
-        fontSize={16}
-        fontBackgroundColor={'#00000000'}
-        fontWeight={'normal'}
-      />
+      <Text style={styles.label}>Name:</Text>
       <NormalInputField
         text={name}
         placeholder={''}
         onChangeText={setName}
-        secureTextEntry={false}
-        fontSize={16}
-        fontWeight={'normal'}
         backgroundColor={'#D9D9D9'}
-        borderColor={'transparent'}
-        borderWidth={0}
         borderRadius={8}
       />
 
-      <NormalText
-        text={'Password:'}
-        fontColor={'#FFFFFFFF'}
-        fontSize={16}
-        fontBackgroundColor={'#00000000'}
-        fontWeight={'normal'}
-      />
+      <Text style={styles.label}>Password:</Text>
       <NormalInputField
         text={password}
         placeholder={''}
         onChangeText={setPassword}
         secureTextEntry={true}
-        fontSize={16}
-        fontWeight={'normal'}
         backgroundColor={'#D9D9D9'}
-        borderColor={'transparent'}
-        borderWidth={0}
         borderRadius={8}
       />
 
-      <NormalText
-        text={'Other Login Options:'}
-        fontColor={'#FFFFFFFF'}
-        fontSize={16}
-        fontBackgroundColor={'#00000000'}
-        fontWeight={'bold'}
-      />
-      <View style={styles.row}>
-        <NormalButton text={'Google'}    onPress={() => {}} height={44} width={90}  backgroundColor={'#D9D9D9'} textColor={'#333333'} borderRadius={8} fontSize={14} fontWeight={'bold'} />
-        <NormalButton text={'Microsoft'} onPress={() => {}} height={44} width={100} backgroundColor={'#D9D9D9'} textColor={'#333333'} borderRadius={8} fontSize={14} fontWeight={'bold'} />
-        <NormalButton text={'Normal'}    onPress={() => {}} height={44} width={90}  backgroundColor={'#D9D9D9'} textColor={'#333333'} borderRadius={8} fontSize={14} fontWeight={'bold'} />
+      <Text style={styles.otherLabel}>Other Login Options:</Text>
+      <View style={styles.socialRow}>
+        <NormalButton
+          text={'Google'}
+          onPress={() => {}}
+          height={36}
+          width={88}
+          backgroundColor={'#D9D9D9'}
+          textColor={'#333333'}
+          borderRadius={6}
+          fontSize={13}
+          fontWeight={'bold'}
+        />
+        <NormalButton
+          text={'Facebook'}
+          onPress={() => {}}
+          height={36}
+          width={100}
+          backgroundColor={'#D9D9D9'}
+          textColor={'#333333'}
+          borderRadius={6}
+          fontSize={13}
+          fontWeight={'bold'}
+        />
+        <NormalButton
+          text={'Normal'}
+          onPress={() => {}}
+          height={36}
+          width={88}
+          backgroundColor={'#D9D9D9'}
+          textColor={'#333333'}
+          borderRadius={6}
+          fontSize={13}
+          fontWeight={'bold'}
+        />
       </View>
 
       <View style={styles.loginRow}>
-        <NormalButton text={'Login'} onPress={onLogin} height={50} width={220} backgroundColor={'#4A8C7A'} textColor={'#FFFFFF'} borderRadius={8} fontSize={18} fontWeight={'bold'} />
+        <NormalButton
+          text={'Login'}
+          onPress={onLogin}
+          height={48}
+          width={200}
+          backgroundColor={'#4A8C7A'}
+          textColor={'#FFFFFF'}
+          borderRadius={8}
+          fontSize={18}
+          fontWeight={'bold'}
+        />
       </View>
     </View>
   );
@@ -89,14 +95,37 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     paddingTop: 80,
   },
-  row: {
+  title: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginBottom: 40,
+  },
+  label: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    marginTop: 14,
+    marginBottom: 4,
+  },
+  otherLabel: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    marginTop: 20,
+    marginBottom: 8,
+  },
+  socialRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 8,
   },
   loginRow: {
     alignItems: 'center',
-    marginTop: 24,
+    marginTop: 28,
   },
 });
 

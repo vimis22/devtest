@@ -6,13 +6,14 @@ interface NormalTextProps {
   fontColor: any;
   fontSize: any;
   fontBackgroundColor: any;
-  fontWeight: any;
+  fontWeight: 'normal' |'bold';
+  fontStyle: 'normal' | 'italic';
 }
 
 const NormalText = (props: NormalTextProps) => {
   return (
     <View>
-      <Text style={{ color: props.fontColor, fontSize: props.fontSize, backgroundColor: props.fontBackgroundColor, fontWeight: props.fontWeight }}>
+      <Text style={{ color: props.fontColor, fontSize: props.fontSize, backgroundColor: props.fontBackgroundColor, fontWeight: props.fontWeight, fontStyle: props.fontStyle }}>
         {props.text}
       </Text>
     </View>

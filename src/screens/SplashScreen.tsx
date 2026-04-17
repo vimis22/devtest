@@ -1,12 +1,11 @@
 import React from 'react';
-import NormalText from '../component/NormalText.tsx';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
 const SplashScreen = () => {
   return (
     <View style={styles.container}>
-      <NormalText text={'CHENTIA'} fontColor={'#FFFFFF'} fontSize={48} fontBackgroundColor={'none'} fontWeight={'bold'} />
-      <ActivityIndicator size={"large"} color={"#FFFFFF"} style={{marginTop: 32}} />
+      <Text style={styles.title}>CHENTIA</Text>
+      <ActivityIndicator size="large" color="#FFFFFF" style={styles.loader} />
     </View>
   );
 };
@@ -22,7 +21,11 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontWeight: 'bold',
     fontStyle: 'italic',
-    color: 'white',
+    color: '#FFFFFF',
   },
-})
+  loader: {
+    marginTop: 32,
+  },
+});
+
 export default SplashScreen;

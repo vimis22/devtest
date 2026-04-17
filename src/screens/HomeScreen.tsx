@@ -1,33 +1,84 @@
 import React from 'react';
-import { Animated, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import BottomBar from '../component/BottomBar.tsx';
 import CardButton from '../component/CardButton.tsx';
-import ScrollView = Animated.ScrollView;
+import TopBar from '../component/TopBar.tsx';
 
 const cards = [
-  {
-    title: 'Room Chat 1',
-    description: 'This Chat is for Room 1',
-    icon: 'Chat',
-  },
-  {
-    title: 'Room Chat 2',
-    description: 'This Chat is for Room 2',
-    icon: 'Chat',
-  },
-  {
-    title: 'Room Chat 3',
-    description: 'This Chat is for Room 3',
-    icon: 'Chat',
-  }
+  { title: 'Room Chat 1', description: 'Description' },
+  { title: 'Room Chat 2', description: 'Description' },
+  { title: 'Room Chat 3', description: 'Description' },
+  { title: 'Room Chat 4', description: 'Description' },
 ];
-const HomeScreen = () => {
-    return (
-      <ScrollView>
+
+interface HomeScreenProps {
+  onOpenChat?: () => void;
+  onAddChat?: () => void;
+}
+
+const HomeScreen = ({ onOpenChat, onAddChat }: HomeScreenProps) => {
+  return (
+    <View style={styles.screen}>
+      <TopBar
+        title={'HomeScreen'}
+        backgroundColor={'#330099'}
+        fontColor={'#FFFFFF'}
+        showAddButton
+        onAddPress={onAddChat}
+      />
+      <ScrollView
+        style={styles.list}
+        contentContainerStyle={styles.listContent}
+      >
+        <View style={styles.feedRow}>
+          <Text style={styles.feedText}>Click to Update the Latest Feed:</Text>
+          <TouchableOpacity>
+            <ActivityIndicator size="small" color="#330099" />
+          </TouchableOpacity>
+        </View>
         {cards.map((card, index) => (
-          <CardButton key={index} title={card.title} backgroundColor={'rgb(255 255 255 / 0,16)'} fontSize={16} description={card.description} circleHeight={50} circleWidth={50} circleBackgroundColor={'#ffffff'} icon={card.icon} />
+          <CardButton
+            key={index}
+            title={card.title}
+            description={card.description}
+            onPress={onOpenChat}
+          />
         ))}
       </ScrollView>
-    );
-}
+      <BottomBar />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  list: {
+    flex: 1,
+  },
+  listContent: {
+    paddingBottom: 16,
+  },
+  feedRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  feedText: {
+    fontSize: 14,
+    color: '#333333',
+  },
+});
 
 export default HomeScreen;

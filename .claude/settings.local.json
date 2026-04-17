@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find C:/Projects/Private_Projects/devtest -name *.png)"
+    ]
+  }
+}
