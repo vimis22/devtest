@@ -5,7 +5,7 @@ interface CardButtonProps {
   title: string;
   backgroundColor: string;
   fontSize: number;
-  subtitle: string;
+  description: string;
   circleHeight: number;
   circleWidth: number;
   circleBackgroundColor: string;
@@ -23,7 +23,7 @@ const CardButton = (props: CardButtonProps) => {
       ></View>
       <View>
         <Text style={{ fontSize: props.fontSize }}>{props.title}</Text>
-        <Text style={{ fontSize: props.fontSize }}>{props.subtitle}</Text>
+        <Text style={{ fontSize: props.fontSize }}>{props.description}</Text>
       </View>
       <View>
         {props.icon}

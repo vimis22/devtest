@@ -4,7 +4,11 @@ import NormalInputField from '../component/NormalInputField.tsx';
 import NormalText from '../component/NormalText.tsx';
 import NormalButton from '../component/NormalButton.tsx';
 
-const LoginScreen = () => {
+interface LoginScreenProps {
+  onLogin: () => void;
+}
+
+const LoginScreen = ({ onLogin }: LoginScreenProps) => {
   const [name, setName] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -72,7 +76,7 @@ const LoginScreen = () => {
       </View>
 
       <View style={styles.loginRow}>
-        <NormalButton text={'Login'} onPress={() => {}} height={50} width={220} backgroundColor={'#4A8C7A'} textColor={'#FFFFFF'} borderRadius={8} fontSize={18} fontWeight={'bold'} />
+        <NormalButton text={'Login'} onPress={onLogin} height={50} width={220} backgroundColor={'#4A8C7A'} textColor={'#FFFFFF'} borderRadius={8} fontSize={18} fontWeight={'bold'} />
       </View>
     </View>
   );
