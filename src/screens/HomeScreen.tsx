@@ -1,73 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View} from 'react-native';
+import BottomBar from '../component/BottomBar';
+import CardButton from '../component/CardButton';
+import NormalPopup from '../component/NormalPopup';
+import TopBar from '../component/TopBar';
 import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import BottomBar from '../component/BottomBar.tsx';
-import CardButton from '../component/CardButton.tsx';
-import TopBar from '../component/TopBar.tsx';
-
-const cards = [
-  { title: 'Room Chat 1', description: 'Description' },
-  { title: 'Room Chat 2', description: 'Description' },
-  { title: 'Room Chat 3', description: 'Description' },
-  { title: 'Room Chat 4', description: 'Description' },
-];
+  ChatRoom,
+  createChatRoom,
+  subscribeToChatRooms,
+} from '../services/FirestoreService';
 
 interface HomeScreenProps {
-  onOpenChat?: () => void;
-  onAddChat?: () => void;
+  onOpenChat: (chatRoom: ChatRoom) => void;
 }
 
-const HomeScreen = ({ onOpenChat, onAddChat }: HomeScreenProps) => {
+const HomeScreen = ({ onOpenChat }: HomeScreenProps) => {
+  const [rooms, setRooms] = useState<ChatRoom[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showCreate, setShowCreate] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToChatRooms(updatedRooms => {
+      setRooms(updatedRooms);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleCreate = async (name: string, description: string) => {
+    await createChatRoom(name, description);
+    setShowCreate(false);
+  }
+
   return (
     <View style={styles.screen}>
-      <TopBar
-        title={'HomeScreen'}
-        backgroundColor={'#330099'}
-        fontColor={'#FFFFFF'}
-        showAddButton
-        onAddPress={onAddChat}
-      />
-      <ScrollView
-        style={styles.list}
-        contentContainerStyle={styles.listContent}
-      >
+      <TopBar title={'HomeScreen'} backgroundColor={'#330099'} fontColor={'#FFFFFF'} showAddButton onAddPress={() => setShowCreate(true)} />
+
+      <ScrollView style={styles.list} contentContainerStyle={styles.listContent}>
         <View style={styles.feedRow}>
-          <Text style={styles.feedText}>Click to Update the Latest Feed:</Text>
-          <TouchableOpacity>
-            <ActivityIndicator size="small" color="#330099" />
-          </TouchableOpacity>
+          <Text style={styles.feedText}>Click to Update the Latest Feed</Text>
+          {loading && <ActivityIndicator size={"small"} color={"#330099"} />}
         </View>
-        {cards.map((card, index) => (
-          <CardButton
-            key={index}
-            title={card.title}
-            description={card.description}
-            onPress={onOpenChat}
-          />
+        {rooms.map(room => (
+          <CardButton key={room.id} title={room.name} description={room.description} onPress={() => onOpenChat(room)} />
         ))}
       </ScrollView>
+
       <BottomBar />
+
+      {showCreate && (
+        <NormalPopup onCreate={handleCreate} onClose={() => setShowCreate(false)} />
+      )}
     </View>
-  );
+  )
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  list: {
-    flex: 1,
-  },
-  listContent: {
-    paddingBottom: 16,
-  },
+  screen: { flex: 1, backgroundColor: '#FFFFFF' },
+  list: { flex: 1 },
+  listContent: { paddingBottom: 16 },
   feedRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -75,10 +66,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  feedText: {
-    fontSize: 14,
-    color: '#333333',
-  },
+  feedText: { fontSize: 14, color: '#333333' },
 });
 
 export default HomeScreen;

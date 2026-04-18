@@ -12,7 +12,20 @@
           "package_name": "com.devtest"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "582978776263-d7ed8d4sq1d2p75n54cs4bln6jlh9qu2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devtest",
+            "certificate_hash": "95e721c7126dc47f3062f4b8f7897f643d8486fe"
+          }
+        },
+        {
+          "client_id": "582978776263-ss2h0rdu87ekr6hbu6qjvfpcfttj490b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDlaEc-iq9Fyxl1q4LirEdc4xi3eY2yliQ"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582978776263-ss2h0rdu87ekr6hbu6qjvfpcfttj490b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "582978776263-hh437n6ljomb7mqmhjshpbn1b2bgf7iu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.devtest"
+              }
+            }
+          ]
         }
       }
     }

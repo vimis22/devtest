@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find C:/Projects/Private_Projects/devtest -name *.png)"
+      "Bash(find C:/Projects/Private_Projects/devtest -name *.png)",
+      "Bash(node -e \"const fs = require\\(''fs''\\); const buf = fs.readFileSync\\(''src/development_task_2024.pdf''\\); const text = buf.toString\\(''utf8'', 0, 8000\\).replace\\(/[^\\\\x20-\\\\x7E\\\\n\\\\r]/g, '' ''\\).replace\\(/ {3,}/g, '' ''\\); console.log\\(text\\);\")",
+      "Bash(powershell -command \":*)",
+      "Bash(cmd.exe /c \"powershell -command \"\":*)",
+      "Bash(node -e \"const p = require\\(''C:/Projects/Private_Projects/devtest/node_modules/@react-native-google-signin/google-signin/package.json''\\); console.log\\(p.version\\)\")",
+      "Bash(adb uninstall:*)",
+      "Read(//c/Projects/Private_Projects/devtest/$LOCALAPPDATA/Android/Sdk/platform-tools/**)",
+      "Read(//c/Projects/Private_Projects/devtest/$HOME/AppData/Local/Android/Sdk/platform-tools/**)",
+      "Read(//c/Users/**)",
+      "Bash(\"/c/Users/vivek/AppData/Local/Android/Sdk/platform-tools/adb.exe\" uninstall:*)"
     ]
   }
 }

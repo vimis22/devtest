@@ -1,89 +1,70 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import NormalButton from '../component/NormalButton.tsx';
-import NormalInputField from '../component/NormalInputField.tsx';
+import React, { useState } from 'react';
+import { Alert, StyleSheet, Text, View } from 'react-native';
+import NormalButton from '../component/NormalButton';
+import { signInWithFacebook, signInWithGoogle } from '../services/AuthService';
 
 interface LoginScreenProps {
   onLogin: () => void;
 }
 
 const LoginScreen = ({ onLogin }: LoginScreenProps) => {
-  const [name, setName] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleGoogle = async () => {
+    try {
+      setLoading(true);
+      await signInWithGoogle();
+      onLogin();
+    } catch (e: any) {
+      Alert.alert('Login fejl', e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFacebook = async () => {
+    try {
+      setLoading(true);
+      await signInWithFacebook();
+      onLogin();
+    } catch (e: any) {
+      Alert.alert('Login fejl', e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CHENTIA</Text>
 
-      <Text style={styles.label}>Name:</Text>
-      <NormalInputField
-        text={name}
-        placeholder={''}
-        onChangeText={setName}
-        backgroundColor={'#D9D9D9'}
-        borderRadius={8}
-      />
-
-      <Text style={styles.label}>Password:</Text>
-      <NormalInputField
-        text={password}
-        placeholder={''}
-        onChangeText={setPassword}
-        secureTextEntry={true}
-        backgroundColor={'#D9D9D9'}
-        borderRadius={8}
-      />
-
       <Text style={styles.otherLabel}>Other Login Options:</Text>
       <View style={styles.socialRow}>
         <NormalButton
           text={'Google'}
-          onPress={() => {}}
-          height={36}
-          width={88}
+          onPress={handleGoogle}
+          height={44}
+          width={120}
           backgroundColor={'#D9D9D9'}
           textColor={'#333333'}
           borderRadius={6}
-          fontSize={13}
+          fontSize={14}
           fontWeight={'bold'}
         />
         <NormalButton
           text={'Facebook'}
-          onPress={() => {}}
-          height={36}
-          width={100}
+          onPress={handleFacebook}
+          height={44}
+          width={120}
           backgroundColor={'#D9D9D9'}
           textColor={'#333333'}
           borderRadius={6}
-          fontSize={13}
-          fontWeight={'bold'}
-        />
-        <NormalButton
-          text={'Normal'}
-          onPress={() => {}}
-          height={36}
-          width={88}
-          backgroundColor={'#D9D9D9'}
-          textColor={'#333333'}
-          borderRadius={6}
-          fontSize={13}
+          fontSize={14}
           fontWeight={'bold'}
         />
       </View>
 
-      <View style={styles.loginRow}>
-        <NormalButton
-          text={'Login'}
-          onPress={onLogin}
-          height={48}
-          width={200}
-          backgroundColor={'#4A8C7A'}
-          textColor={'#FFFFFF'}
-          borderRadius={8}
-          fontSize={18}
-          fontWeight={'bold'}
-        />
-      </View>
+      {loading && <Text style={styles.loadingText}>Logger ind...</Text>}
     </View>
   );
 };
@@ -94,38 +75,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#330099',
     paddingHorizontal: 32,
     paddingTop: 80,
+    alignItems: 'center',
   },
   title: {
     fontSize: 48,
     fontWeight: 'bold',
     fontStyle: 'italic',
     color: '#FFFFFF',
-    textAlign: 'center',
-    marginBottom: 40,
-  },
-  label: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontWeight: 'bold',
-    fontStyle: 'italic',
-    marginTop: 14,
-    marginBottom: 4,
+    marginBottom: 60,
   },
   otherLabel: {
     color: '#FFFFFF',
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: 'bold',
     fontStyle: 'italic',
-    marginTop: 20,
-    marginBottom: 8,
+    marginBottom: 16,
   },
   socialRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    gap: 16,
   },
-  loginRow: {
-    alignItems: 'center',
-    marginTop: 28,
+  loadingText: {
+    color: '#FFFFFF',
+    marginTop: 24,
+    fontSize: 14,
   },
 });
 

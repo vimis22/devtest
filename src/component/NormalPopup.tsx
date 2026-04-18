@@ -41,12 +41,20 @@ const NormalPopup = (props: NormalPopupProps) => {
           />
         </View>
 
-        <TouchableOpacity
-          style={styles.createButton}
-          onPress={() => props.onCreate?.(chatName, description)}
-        >
-          <Text style={styles.createButtonText}>Create</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity
+            style={styles.createButton}
+            onPress={() => props.onCreate?.(chatName, description)}
+          >
+            <Text style={styles.buttonText}>Create</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.cancelButton}
+            onPress={() => props.onClose?.()}
+          >
+            <Text style={styles.buttonText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -94,14 +102,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     fontSize: 14,
   },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 8,
+    gap: 12,
+  },
   createButton: {
+    flex: 1,
     backgroundColor: '#3A7A3A',
     borderRadius: 6,
     paddingVertical: 10,
     alignItems: 'center',
-    marginTop: 8,
   },
-  createButtonText: {
+  cancelButton: {
+    flex: 1,
+    backgroundColor: '#C0392B',
+    borderRadius: 6,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',

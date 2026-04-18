@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">devtest</string>
+    <string name="app_name">CHENTIA</string>
+    <string name="facebook_app_id">4348795115388933</string>
+    <string name="facebook_client_token">d11eba065df7c1ba6581d0e050af2a9c</string>
+    <string name="fb_login_protocol_scheme">fb4348795115388933</string>
 </resources>
